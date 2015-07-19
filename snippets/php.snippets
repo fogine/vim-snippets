@@ -291,7 +291,7 @@ snippet eif
 		${0}
 	}
 snippet switch
-	switch ($${1:variable}) {
+	switch ($${1:variable}) :
 		case '${2:value}':
 			${3}
 			break;
@@ -299,7 +299,7 @@ snippet switch
 		default:
 			${4}
 			break;
-	}
+	endswitch;
 snippet case
 	case '${1:value}':
 		${2}

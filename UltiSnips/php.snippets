@@ -7,6 +7,10 @@ snippet array "array"
 $${1:arrayName} = array('${2}' => ${3});${4}
 endsnippet
 
+snippet t. "$this->" tsi
+	\$this->
+endsnippet
+
 snippet def "def"
 define('${1:VARIABLE_NAME}', ${2:'definition'});${3}
 endsnippet
@@ -52,9 +56,9 @@ for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
 endsnippet
 
 snippet foreachk "foreachk"
-foreach ($${1:variable} as $${2:key} => $${3:value}) {
+foreach ($${1:variable} as $${2:key} => $${3:value}):
 	${4:// code...}
-}
+endforeach;
 endsnippet
 
 snippet get "get"
@@ -62,15 +66,9 @@ $_GET['${1}']${2}
 endsnippet
 
 snippet if "if"
-if (${1:/* condition */}) {
+if (${1:/* condition */}) :
 	${2:// code...}
-}
-endsnippet
-
-snippet elif "elseif"
-elseif (${1:/* condition */}) {
-	${2:// code...}
-}
+endif;
 endsnippet
 
 snippet inc "inc"
@@ -115,6 +113,7 @@ public function get${1/\w+\s*/\u$0/}()
 {
     return $this->$1;$3
 }
+$4
 endsnippet
 
 snippet setter "PHP Class Setter" b
@@ -246,9 +245,9 @@ $0
 endsnippet
 
 snippet fore "Foreach loop"
-foreach ($${1:variable} as $${3:value}) {
+foreach ($${1:variable} as $${3:value}):
 	${VISUAL}${4}
-}
+endforeach;
 $0
 endsnippet
 
@@ -258,11 +257,11 @@ $0
 endsnippet
 
 snippet ife "if else"
-if (${1:/* condition */}) {
+if (${1:/* condition */}) :
 	${2:// code...}
-} else {
+else :
 	${3:// code...}
-}
+endif;
 $0
 endsnippet
 
