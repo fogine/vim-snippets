@@ -107,7 +107,7 @@ snippet getter "PHP Class Getter" b
 /**
  * Getter for $1
  *
- * ${2:return string}
+ * @return ${2:string}
  */
 public function get${1/\w+\s*/\u$0/}()
 {
@@ -120,7 +120,7 @@ snippet setter "PHP Class Setter" b
 /**
  * Setter for $1
  *
- * @param ${2:string} $$1                                                                                                                               
+ * @param ${2:string} $$1
  * @return ${3:`!p snip.rv=snip.basename`}
  */
 public function set${1/\w+\s*/\u$0/}(${4:${2/(void|string|int|integer|double|float|object|boolear|null|mixed|number|resource)|(.*)/(?1::$2 )/}}$$1)
@@ -136,7 +136,7 @@ snippet gs "PHP Class Getter Setter" b
 /**
  * Getter for $1
  *
- * return ${2:string}
+ * @return ${2:string}
  */
 public function get${1/\w+\s*/\u$0/}()
 {
@@ -267,8 +267,8 @@ endsnippet
 
 snippet ns "namespace declaration" b
 namespace ${1:`!p
-abspath = os.path.abspath(path)
-m = re.search(r'[A-Z].+(?=/)', abspath)
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
 if m:
 	snip.rv = m.group().replace('/', '\\')
 `};
@@ -278,8 +278,8 @@ snippet class "Class declaration template" b
 <?php
 
 namespace ${1:`!p
-abspath = os.path.abspath(path)
-m = re.search(r'[A-Z].+(?=/)', abspath)
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
 if m:
 	snip.rv = m.group().replace('/', '\\')
 `};
@@ -297,8 +297,8 @@ snippet interface "Interface declaration template" b
 <?php
 
 namespace ${1:`!p
-abspath = os.path.abspath(path)
-m = re.search(r'[A-Z].+(?=/)', abspath)
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
 if m:
 	snip.rv = m.group().replace('/', '\\')
 `};
@@ -309,10 +309,28 @@ if m:
  */
 interface $1
 {
-	public function ${3:someFunction}();$4                                                                                                              
+	public function ${3:someFunction}();$4
 }
 endsnippet
 
+snippet trait "Trait declaration template" b
+<?php
+
+namespace ${1:`!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`};
+
+/**
+ * Trait ${1:`!p snip.rv=snip.basename`}
+ * @author ${2:`!v g:snips_author`}
+ */
+trait $1
+{
+}
+endsnippet
 
 snippet construct "__construct()" b
 /**
@@ -324,31 +342,29 @@ public function __construct(${1:$dependencies})
 $0
 endsnippet
 
-snippet ve "Dumb debug helper in HTML"
-    echo '<pre>' . var_export($1, 1) . '</pre>';$0
-endsnippet
+# PHPUnit snippets
+snippet testcase "class XYZTest extends \PHPUnit_Framework_TestCase { ... }"
+<?php
 
-snippet pc "Dumb debug helper in cli"
-var_export($1);$0
-endsnippet
+namespace `!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`;
 
-# Symfony 2 based snippets
-snippet sfa "Symfony 2 Controller action"
 /**
-* @Route("/${1:route_name}", name="$1")
-* @Template()
-*/
-public function $1Action($2)
-{
-	$3
-	return ${4:array();}$0
-}
-endsnippet
-
-snippet inheritdoc "@inheritdoc docblock"
-/**
- * {@inheritdoc}
+ * @author `!v g:snips_author`
  */
+class `!p
+snip.rv = re.match(r'.*(?=\.)', fn).group()
+` extends \PHPUnit_Framework_TestCase
+{
+	public function test${1}()
+	{
+		${0:${VISUAL}}
+	}
+}
 endsnippet
 
 # :vim:ft=snippets:
