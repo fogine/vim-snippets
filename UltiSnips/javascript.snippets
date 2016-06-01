@@ -101,6 +101,34 @@ function($1) {
 }
 endsnippet
 
+snippet if "if condition" b
+if (${1}) {
+	${VISUAL}$2
+}$0
+endsnippet
+
+snippet eif "else if condition" b
+else if (${1}) {
+	${VISUAL}$2
+}$0
+endsnippet
+
+snippet ife "if else condition" b
+if (${1}) {
+	${VISUAL}$2
+} else {
+	${3}
+}
+$0
+endsnippet
+
+snippet else "else block" b
+else {
+	${VISUAL}$1
+}
+$0
+endsnippet
+
 snippet iife "Immediately-Invoked Function Expression (iife)"
 (function(${1:window}) {
 	${VISUAL}$0
