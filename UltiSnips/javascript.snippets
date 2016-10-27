@@ -25,6 +25,44 @@ def createFnArgTabstops(snip, tabArgIndex, docArgIndex):
 		snip.expand_anon(subSnippet)
 endglobal
 
+# Tests BDD
+
+snippet describe "describe('TestedSection', () => {})"
+describe('${1}', function() {
+	${VISUAL}${0}
+});
+endsnippet
+
+snippet it "it('should ...', () => {})"
+it('should ${1}', function() {
+	${VISUAL}${0}
+});
+endsnippet
+
+snippet before "before(() => {})"
+before(function() {
+	${VISUAL}${0}
+});
+endsnippet
+
+snippet after "after(() => {})"
+after(function() {
+	${VISUAL}${0}
+});
+endsnippet
+
+snippet beforeEach "beforeEach(() => {})"
+beforeEach(function() {
+	${VISUAL}${0}
+});
+endsnippet
+
+snippet afterEach "afterEach(() => {})"
+afterEach(function() {
+	${VISUAL}${0}
+});
+endsnippet
+
 snippet get "Get Elements"
 getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
 endsnippet
